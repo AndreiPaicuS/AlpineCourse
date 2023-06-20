@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/style.css" rel="stylesheet" />
+    <title>Demo</title>
+  </head>
+  <body>
+    <div
+      class="flex flex-col items-center w-full"
+      x-data="{ title :  'TODO LIST' }"
+      x-init=" code to be insialized "
+    >
+      <div class="text-9xl text-center w-full" x-text="title"></div>
+      <div class="flex p-5 gap-5 w-full" x-data="{todos:['Form','Homepage']}">
+        <!-- TODO -->
+        <div class="w-full bg-yellow-100 p-5 border rounded-md shadow-md">
+          <h2 class="text-4xl text-center">ToDos</h2>
+          <p x-cloak x-transition x-show="todos.length==0" class="text-red">
+            Nothing here yet
+          </p>
+          <div class="flex flex-col gap-2.5 mb-5">
+            <template x-for="todo in todos">
+              <div class="border p-2.5 bg-white flex justify-between">
+                <p x-text="todo"></p>
+                <button
+                  class="rounded-full bg-red text-white px-2"
+                  x-on:click="todos.splice(todos.findIndex(e=>e==todo),1)"
+                >
+                  X
+                </button>
+              </div>
+            </template>
+          </div>
+          <div
+            class="relative"
+            x-data="{ openForm : false }"
+            x-on:click.outside="openForm=false"
+          >
+            <button
+              class="p-2 border rounded-md bg-slate-100"
+              x-on:click="openForm=true"
+            >
+              Add Item
+            </button>
+            <div
+              class="absolute top-full left-0 max-h-0 overflow-hidden transition-all duration-500 bg-white shadow-xl rounded-b-xl"
+              x-bind:class="openForm&&'max-h-96 p-2.5'"
+              x-data="{ title :  '',errorMessage:false }"
+              x-effect=" if(title){
+                errorMessage=''
+              } "
+            >
+              <input
+                type="text"
+                class="mb-3"
+                placeholder="Title"
+                x-model="title"
+              />
+              <p class="text-red" x-show="errorMessage">
+                Value must be at least 3 characters length
+              </p>
+              <input
+                type="button"
+                value="Add to list"
+                class="p-2 border rounded-md bg-slate-100"
+                x-on:click="()=>{
+                  if(title.length<3){
+                    errorMessage=true
+                  }
+                  else{
+                    todos.push(title);
+                    openForm=false;
+                    title=''
+                  }
+                }"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- DOING -->
+        <div class="w-full bg-green-200 p-5 border rounded-md shadow-md">
+          <h2 class="text-4xl text-center">Doing</h2>
+          <template x-if="todos.length==0">
+            <p class="text-red">Nothing here yet</p>
+          </template>
+          <div class="flex flex-col gap-2.5 mb-5">
+            <template x-for="todo in todos">
+              <div class="border p-2.5 bg-white flex justify-between">
+                <p x-text="todo"></p>
+                <button
+                  class="rounded-full bg-red text-white px-2"
+                  x-on:click="todos.splice(todos.findIndex(e=>e==todo),1)"
+                >
+                  X
+                </button>
+              </div>
+            </template>
+          </div>
+          <div
+            class="relative"
+            x-data="{ openForm : false }"
+            x-on:click.outside="openForm=false"
+          >
+            <button
+              class="p-2 border rounded-md bg-slate-100"
+              x-on:click="openForm=true"
+            >
+              Add Item
+            </button>
+            <div
+              class="absolute top-full left-0 max-h-0 overflow-hidden transition-all duration-500 bg-white shadow-xl rounded-b-xl"
+              x-bind:class="openForm&&'max-h-96 p-2.5'"
+              x-data="{ title :  '',errorMessage:'' }"
+              x-effect=" if(title){
+                errorMessage=''
+              } "
+            >
+              <input
+                type="text"
+                class="mb-3"
+                placeholder="Title"
+                x-model="title"
+              />
+              <p class="text-red" x-text="errorMessage"></p>
+              <input
+                type="button"
+                value="Add to list"
+                class="p-2 border rounded-md bg-slate-100"
+                x-on:click="()=>{
+                  if(title.length<3){
+                    errorMessage='Value must be at least 3 characters length'
+                  }
+                  else{
+                    todos.push(title);
+                    openForm=false;
+                    title=''
+                  }
+                }"
+              />
+            </div>
+          </div>
+        </div>
+        <!-- DONE -->
+        <div class="w-full bg-green-600 p-5 border rounded-md shadow-md">
+          <h2 class="text-4xl text-center">Done</h2>
+          <template x-if="todos.length==0">
+            <p class="text-red">Nothing here yet</p>
+          </template>
+          <div class="flex flex-col gap-2.5 mb-5">
+            <template x-for="todo in todos">
+              <div class="border p-2.5 bg-white flex justify-between">
+                <p x-text="todo"></p>
+                <button
+                  class="rounded-full bg-red text-white px-2"
+                  x-on:click="todos.splice(todos.findIndex(e=>e==todo),1)"
+                >
+                  X
+                </button>
+              </div>
+            </template>
+          </div>
+          <div
+            class="relative"
+            x-data="{ openForm : false }"
+            x-on:click.outside="openForm=false"
+          >
+            <button
+              class="p-2 border rounded-md bg-slate-100"
+              x-on:click="openForm=true"
+            >
+              Add Item
+            </button>
+            <div
+              class="absolute top-full left-0 max-h-0 overflow-hidden transition-all duration-500 bg-white shadow-xl rounded-b-xl"
+              x-bind:class="openForm&&'max-h-96 p-2.5'"
+              x-data="{ title :  '',errorMessage:'' }"
+              x-effect=" if(title){
+                errorMessage=''
+              } "
+            >
+              <input
+                type="text"
+                class="mb-3"
+                placeholder="Title"
+                x-model="title"
+              />
+              <p class="text-red" x-text="errorMessage"></p>
+              <input
+                type="button"
+                value="Add to list"
+                class="p-2 border rounded-md bg-slate-100"
+                x-on:click="()=>{
+                  if(title.length<3){
+                    errorMessage='Value must be at least 3 characters length'
+                  }
+                  else{
+                    todos.push(title);
+                    openForm=false;
+                    title=''
+                  }
+                }"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

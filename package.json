@@ -1,0 +1,30 @@
+{
+  "main": "dist/index.html",
+  "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "html-webpack-plugin": "^5.5.0",
+    "postcss": "^8.4.16",
+    "postcss-loader": "^7.0.1",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.1.8",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
+  },
+  "scripts": {
+    "build": "tailwind build src/styles/style.css -o dist/style.css && webpack",
+    "dev": "webpack serve",
+    "css:watch": "tailwind build src/styles/style.css -o dist/style.css --watch",
+    "css:build": "tailwind build src/styles/style.css -o dist/style.css "
+  },
+  "dependencies": {
+    "@caneara/iodine": "^8.3.0",
+    "alpinejs": "^3.10.3",
+    "file-loader": "^6.2.0",
+    "i": "^0.3.7",
+    "npm": "^9.1.1",
+    "swiper": "^8.4.4"
+  }
+}
